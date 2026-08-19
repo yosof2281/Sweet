@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المايسترو - تصميم داخلي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Tajawal:wght@300;400;500;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDqOrmezQTENN0VKMOQ7BMiLgWnZj-wgm0",
+    authDomain: "maestrooooo.firebaseapp.com",
+    projectId: "maestrooooo",
+    storageBucket: "maestrooooo.firebasestorage.app",
+    messagingSenderId: "913836569282",
+    appId: "1:913836569282:web:2d8c17c1c349dcc021015b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // نخليه global عشان نستخدمه في ملفك
+  window.db = db;
+  window.addDoc = addDoc;
+  window.collection = collection;
+</script>
+<body>
+    <!-- Background Shapes -->
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
+    <div class="min-h-screen flex flex-col relative overflow-hidden">
+        <!-- Header / Hero Section -->
+        <header class="pt-16 pb-12 px-6 text-center">
+            <div class="max-w-3xl mx-auto space-y-6">
+                <div class="badge">
+                    <span>DESIGN & BUILD</span>
+                </div>
+                
+                <!-- Hero Title مع الصور -->
+                <div class="hero-with-images">
+                    <!-- الصورة المربعة على الشمال -->
+                    <div class="hero-image square-image">
+                        <img src="images/image3.jpg" alt="صورة مربعة">
+                    </div>
+
+                    <!-- النص في المنتصف -->
+                    <div class="hero-text-wrapper">
+                        <h1 class="hero-title">
+                            الأناقة في كل <span class="text-gradient-gold">تفصيلة</span>
+                        </h1>
+                    </div>
+
+                    <!-- الصورة المستطيلة على اليمين -->
+                    <div class="hero-image rectangle-image">
+                        <img src="images/image4.jpg" alt="صورة مستطيلة">
+                    </div>
+                </div>
+                
+                <p class="hero-description">
+                    نحن هنا لنحول مساحتك إلى تحفة فنية تعكس ذوقك الخاص. دعنا نساعدك في تصميم وتشطيب شقتك بأعلى معايير الجودة والاحترافية.
+                </p>
+            </div>
+
+            <!-- Feature Icons -->
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3z"/><path d="M9 9h6v6H9z"/>
+                        </svg>
+                    </div>
+                    <span>تصميم دقيق</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/>
+                        </svg>
+                    </div>
+                    <span>تشطيب راقي</span>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5z"/>
+                        </svg>
+                    </div>
+                    <span>تسليم على المفتاح</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content Form -->
+        <main class="flex-1 px-4 pb-24">
+            <section class="survey-section glass-card" id="survey">
+                <div class="survey-header">
+                    <h2 class="survey-title">
+                        ابدأ رحلة <span class="text-gradient-gold">تشطيب شقتك</span>
+                    </h2>
+                    <p class="survey-subtitle">يرجى تعبئة البيانات التالية بدقة لنتمكن من تقديم أفضل عرض سعر وتصميم يناسب تطلعاتك.</p>
+                </div>
+
+                <!-- Tabs Navigation -->
+                <div class="survey-tabs" id="surveyTabs">
+                    <button type="button" class="survey-tab active" data-tab="tab-client">
+                        <span class="tab-number">1</span>
+                        <span class="tab-label">بيانات العميل</span>
+                    </button>
+                    <button type="button" class="survey-tab" data-tab="tab-inputs">
+                        <span class="tab-number">2</span>
+                        <span class="tab-label">المدخلات</span>
+                    </button>
+                    <button type="button" class="survey-tab" data-tab="tab-result">
+                        <span class="tab-number">3</span>
+                        <span class="tab-label">النتيجة</span>
+                    </button>
+                </div>
+                
+                <form id="surveyForm" class="form-grid">
+
+                    <!-- ============ Tab 1: بيانات العميل ============ -->
+                    <div class="tab-panel active" id="tab-client" data-panel="tab-client">
+                        <div class="tab-panel-grid">
+                            <div class="form-group">
+                                <label for="name">اسم العميل</label>
+                                <input type="text" id="name" name="clientName" placeholder="الاسم الثلاثي" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">رقم الهاتف</label>
+                                <input type="tel" id="phone" name="phoneNumber" placeholder="رقم للتواصل (يفضل واتساب)" dir="ltr" required>
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="how">كيف تعرفت على خدمتنا؟</label>
+                                <select id="how" name="how" required>
+                                    <option value="">اختر المصدر</option>
+                                    <option value="عبر الفيسبوك">عبر الفيسبوك</option>
+                                    <option value="عبر الصالح جروب">عبر الصالح جروب</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="location">المكان</label>
+                                <select id="location" name="locationType" required>
+                                    <option value="">اختر نوع المكان</option>
+                                    <option value="كومباوند">كومباوند</option>
+                                    <option value="عمائر منفصلة">عمائر منفصلة</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="area">المنطقة</label>
+                                <input type="text" id="area" name="area" placeholder="مثال: التجمع الخامس، زايد..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="unit-area">مساحة الوحدة (متر مربع)</label>
+                                <input type="number" id="unit-area" name="unitArea" placeholder="مثال: 150" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="apartment">حالة الشقة الحالية</label>
+                                <select id="apartment" name="apartmentState" required>
+                                    <option value="">اختر حالة الشقة</option>
+                                    <option value="محارة">محارة</option>
+                                    <option value="طوب أحمر">طوب أحمر</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="paint-type">نوع الأصباغ (الدهانات) المفضل</label>
+                                <select id="paint-type" name="paintType" required>
+                                    <option value="">اختر ماركة الدهان</option>
+                                    <option value="جوتن">جوتن (Jotun)</option>
+                                    <option value="GLC">جي إل سي (GLC)</option>
+                                    <option value="سايبس">سايبس (Sipes)</option>
+                                    <option value="سكيب">سكيب (Scib)</option>
+                                    <option value="أخرى">ماركة أخرى</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="tab-nav-buttons">
+                            <button type="button" class="tab-next-btn" data-next="tab-inputs">التالي: المدخلات ⟵</button>
+                        </div>
+                    </div>
+
+                    <!-- ============ Tab 2: المدخلات ============ -->
+                    <div class="tab-panel" id="tab-inputs" data-panel="tab-inputs">
+                        <div class="tab-panel-grid">
+                            <div class="form-group">
+                                <label for="floor">الدور</label>
+                                <input type="text" id="floor" name="floor" placeholder="رقم الدور" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="designType">نوع التصميم المطلوب</label>
+                                <select id="designType" name="designType" required>
+                                    <option value="">اختر نوع التصميم</option>
+                                    <option value="فندقي">فندقي</option>
+                                    <option value="مودرن">مودرن</option>
+                                    <option value="ستيل">ستيل</option>
+                                    <option value="كلاسيك">كلاسيك</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="floor-type">نوع الأرضيات</label>
+                                <select id="floor-type" name="flooring" required>
+                                    <option value="">اختر نوع الأرضيات</option>
+                                    <option value="بورسلين">بورسلين</option>
+                                    <option value="سيراميك">سيراميك</option>
+                                    <option value="HDF">HDF</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="designs-available">هل متوافر مع العميل تصميمات 2D أو 3D؟</label>
+                                <select id="designs-available" name="designsAvailable" required>
+                                    <option value="">اختر الخيار</option>
+                                    <option value="نعم">نعم</option>
+                                    <option value="لا">لا</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="electricity">تأسيس الكهرباء</label>
+                                <select id="electricity" name="electricity" required>
+                                    <option value="">اختر نظام الكهرباء</option>
+                                    <option value="سمارت">نظام سمارت (Smart Home)</option>
+                                    <option value="عادية">كهرباء عادية</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="plumbing">تأسيس السباكة</label>
+                                <select id="plumbing" name="plumbing" required>
+                                    <option value="">اختر نظام السباكة</option>
+                                    <option value="دفن">دفن (مخفي)</option>
+                                    <option value="عادية">عادية</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="customer-location">مكان إقامة العميل الحالي</label>
+                                <select id="customer-location" name="clientLocation" required>
+                                    <option value="">اختر مكان الإقامة</option>
+                                    <option value="داخل مصر">داخل مصر</option>
+                                    <option value="خارج مصر">خارج مصر</option>
+                                </select>
+                            </div>
+
+                            <!-- ===== بيانات الشقة العامة ===== -->
+                            <div class="field-subsection-title">بيانات الشقة العامة</div>
+
+                            <div class="form-group">
+                                <label for="rooms-count">الغرف</label>
+                                <div class="counter-group" data-counter="rooms-count" data-min="0" data-max="20">
+                                    <button type="button" class="counter-btn" data-action="increase">+</button>
+                                    <span class="counter-value" id="rooms-count-value">3</span>
+                                    <button type="button" class="counter-btn" data-action="decrease">−</button>
+                                </div>
+                                <input type="hidden" id="rooms-count" name="roomsCount" value="3">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bathrooms-count">الحمامات</label>
+                                <div class="counter-group" data-counter="bathrooms-count" data-min="0" data-max="20">
+                                    <button type="button" class="counter-btn" data-action="increase">+</button>
+                                    <span class="counter-value" id="bathrooms-count-value">2</span>
+                                    <button type="button" class="counter-btn" data-action="decrease">−</button>
+                                </div>
+                                <input type="hidden" id="bathrooms-count" name="bathroomsCount" value="2">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kitchens-count">المطابخ</label>
+                                <div class="counter-group" data-counter="kitchens-count" data-min="0" data-max="10">
+                                    <button type="button" class="counter-btn" data-action="increase">+</button>
+                                    <span class="counter-value" id="kitchens-count-value">1</span>
+                                    <button type="button" class="counter-btn" data-action="decrease">−</button>
+                                </div>
+                                <input type="hidden" id="kitchens-count" name="kitchensCount" value="1">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="balconies-count">البلكونات</label>
+                                <div class="counter-group" data-counter="balconies-count" data-min="0" data-max="10">
+                                    <button type="button" class="counter-btn" data-action="increase">+</button>
+                                    <span class="counter-value" id="balconies-count-value">0</span>
+                                    <button type="button" class="counter-btn" data-action="decrease">−</button>
+                                </div>
+                                <input type="hidden" id="balconies-count" name="balconiesCount" value="0">
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="ceiling-height">ارتفاع السقف</label>
+                                <select id="ceiling-height" name="ceilingHeight">
+                                    <option value="">اختر ارتفاع السقف</option>
+                                    <option value="2.80 م">2.80 م</option>
+                                    <option value="3.00 م">3.00 م</option>
+                                    <option value="3.20 م" selected>3.20 م</option>
+                                    <option value="3.50 م">3.50 م</option>
+                                    <option value="أكثر من 3.50 م">أكثر من 3.50 م</option>
+                                </select>
+                            </div>
+
+                            <!-- ===== مستوى التشطيب والحالة ===== -->
+                            <div class="field-subsection-title">مستوى التشطيب والحالة</div>
+
+                            <div class="form-group">
+                                <label for="finishing-level">مستوى التشطيب</label>
+                                <select id="finishing-level" name="finishingLevel">
+                                    <option value="">اختر مستوى التشطيب</option>
+                                    <option value="متوسط">متوسط</option>
+                                    <option value="فوق متوسط">فوق متوسط</option>
+                                    <option value="سوبر لوكس">سوبر لوكس</option>
+                                    <option value="لوكس فندقي">لوكس فندقي</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="plastering-scope">نطاق المحارة</label>
+                                <select id="plastering-scope" name="plasteringScope">
+                                    <option value="">اختر نطاق المحارة</option>
+                                    <option value="كل الحوائط">كل الحوائط</option>
+                                    <option value="حوائط جزئية">حوائط جزئية</option>
+                                    <option value="بدون محارة">بدون محارة</option>
+                                </select>
+                            </div>
+
+                            <div class="field-note">
+                                عند تنفيذ محارة جديدة لكل الحوائط يتم اعتماد سطح جيد جدًا تلقائيًا، لذلك لا نطلب حالة المحارة القديمة.
+                            </div>
+
+                            <!-- ===== السيراميك والدهانات ===== -->
+                            <div class="field-subsection-title">السيراميك والدهانات</div>
+
+                            <div class="form-group">
+                                <label for="porcelain-source">مصدر البورسلين</label>
+                                <select id="porcelain-source" name="porcelainSource">
+                                    <option value="">اختر مصدر البورسلين</option>
+                                    <option value="مصري">مصري</option>
+                                    <option value="إسباني">إسباني</option>
+                                    <option value="إيطالي">إيطالي</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="tile-size">مقاس البلاطة</label>
+                                <select id="tile-size" name="tileSize">
+                                    <option value="">اختر مقاس البلاطة</option>
+                                    <option value="60×60">60 × 60</option>
+                                    <option value="60×120">60 × 120</option>
+                                    <option value="120×120">120 × 120</option>
+                                    <option value="أخرى">مقاس آخر</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gypsum-ratio">نسبة الجبس بورد من السقف</label>
+                                <select id="gypsum-ratio" name="gypsumRatio">
+                                    <option value="">اختر النسبة</option>
+                                    <option value="فلات كامل">فلات كامل</option>
+                                    <option value="كورنيش فقط">كورنيش فقط</option>
+                                    <option value="حواف فقط">حواف فقط</option>
+                                    <option value="بدون">بدون جبس بورد</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="kitchen-tiling">تبليط المطبخ</label>
+                                <select id="kitchen-tiling" name="kitchenTiling">
+                                    <option value="">اختر طريقة التبليط</option>
+                                    <option value="بين الوحدات فقط">بين الوحدات فقط</option>
+                                    <option value="حتى السقف">حتى السقف</option>
+                                    <option value="بدون تبليط">بدون تبليط</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="colors-count">عدد الألوان</label>
+                                <div class="counter-group" data-counter="colors-count" data-min="1" data-max="10">
+                                    <button type="button" class="counter-btn" data-action="increase">+</button>
+                                    <span class="counter-value" id="colors-count-value">1</span>
+                                    <button type="button" class="counter-btn" data-action="decrease">−</button>
+                                </div>
+                                <input type="hidden" id="colors-count" name="colorsCount" value="1">
+                            </div>
+
+                            <!-- ===== الأبواب والشبابيك ===== -->
+                            <div class="field-subsection-title">الأبواب والشبابيك</div>
+
+                            <div class="form-group">
+                                <label for="interior-door-type">نوع الأبواب الداخلية</label>
+                                <select id="interior-door-type" name="interiorDoorType">
+                                    <option value="">اختر نوع الباب</option>
+                                    <option value="HPL">HPL</option>
+                                    <option value="خشب">خشب</option>
+                                    <option value="ألوميتال">ألوميتال</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="interior-doors-count">الأبواب الداخلية</label>
+                                <div class="counter-group" data-counter="interior-doors-count" data-min="0" data-max="20">
+                                    <button type="button" class="counter-btn" data-action="increase">+</button>
+                                    <span class="counter-value" id="interior-doors-count-value">3</span>
+                                    <button type="button" class="counter-btn" data-action="decrease">−</button>
+                                </div>
+                                <input type="hidden" id="interior-doors-count" name="interiorDoorsCount" value="3">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="window-type">نوع الشبابيك</label>
+                                <select id="window-type" name="windowType">
+                                    <option value="">اختر نوع الشبابيك</option>
+                                    <option value="ألمنيوم PS صغير">ألمنيوم PS صغير</option>
+                                    <option value="ألمنيوم PS كبير">ألمنيوم PS كبير</option>
+                                    <option value="UPVC">UPVC</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="glass-type">الزجاج</label>
+                                <select id="glass-type" name="glassType">
+                                    <option value="">اختر نوع الزجاج</option>
+                                    <option value="Single">Single</option>
+                                    <option value="Double">Double</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full">
+                                <label for="windows-area-method">حصر مساحة الشبابيك وباب البلكونة</label>
+                                <select id="windows-area-method" name="windowsAreaMethod">
+                                    <option value="">اختر طريقة الحصر</option>
+                                    <option value="تقدير من الفراغات">تقدير من الفراغات</option>
+                                    <option value="مقاسات فعلية">مقاسات فعلية</option>
+                                </select>
+                            </div>
+
+                            <div class="field-note">
+                                المساحة المقدرة للشبابيك وباب البلكونة تُحسب تلقائيًا. يمكن تحويلها لإدخال يدوي عند وجود مقاسات فعلية.
+                            </div>
+                        </div>
+
+                        <div class="tab-nav-buttons">
+                            <button type="button" class="tab-prev-btn" data-prev="tab-client">⟶ السابق: بيانات العميل</button>
+                            <button type="button" class="tab-next-btn" data-next="tab-result">التالي: النتيجة ⟵</button>
+                        </div>
+                    </div>
+
+                    <!-- ============ Tab 3: النتيجة ============ -->
+                    <div class="tab-panel" id="tab-result" data-panel="tab-result">
+                        <div class="tab-panel-grid">
+                            <div class="form-group full">
+                                <p class="result-placeholder">راجع بياناتك ثم اضغط إرسال عبر واتساب.</p>
+                            </div>
+                        </div>
+
+                        <div class="tab-nav-buttons">
+                            <button type="button" class="tab-prev-btn" data-prev="tab-inputs">⟶ السابق: المدخلات</button>
+                        </div>
+
+                        <button type="submit" class="submit-btn full">📱 إرسال عبر واتساب</button>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- Portfolio Section - Horizontal Scroll -->
+            <section class="portfolio-section" id="portfolio">
+                <h2 class="section-title">جزء من تصميماتنا الحديثة</h2>
+                <div class="portfolio-wrapper">
+                    <div class="portfolio-scroll" id="portfolioGrid">
+                        <div class="portfolio-item">
+                                        <img src="images/portfolio1.jpg" alt="عميل 1">
+                        </div>
+                        <div class="testimonial-item">
+                            <img src="images/portfolio2.jpg" alt="عميل 2">
+                        </div>
+                        <div class="testimonial-item">
+                            <img src="images/portfolio3.jpg" alt="عميل 3">
+                        </div>
+                         <!-- الصورة 1 -->
+                        <div class="testimonial-item">
+                            <img src="images/portfolio4.jpg" alt="عميل 1">
+                        </div>
+                         <!-- الصورة 1 -->
+            <div class="testimonial-item">
+                <img src="images/portfolio5.jpg" alt="عميل 1">
+            </div>
+                         <!-- الصورة 1 -->
+            <div class="testimonial-item">
+                <img src="images/portfolio6.jpg" alt="عميل 1">
+            </div>
+                         <!-- الصورة 1 -->
+            <div class="testimonial-item">
+                <img src="images/portfolio6.jpg" alt="عميل 1">
+            </div>
+                        v
+                         <!-- الصورة 1 -->
+            <div class="testimonial-item">
+                <img src="images/portfolio7.jpg" alt="عميل 1">
+            </div>
+                          <!-- الصورة 1 -->
+            <div class="testimonial-item">
+                <img src="images/portfolio8.jpg" alt="عميل 1">
+            </div>
+                          <!-- الصورة 1 -->
+            <div class="testimonial-item">
+                <img src="images/portfolio9.jpg" alt="عميل 1">
+            </div>
+                          <!-- الصورة 1 -->
+            <div class="testimonial-item">
+                <img src="images/portfolio10.jpg" alt="عميل 1">
+            </div>
+                        
+                        <div class="testimonial-item">
+                            <img src="images/portfolio11.jpg" alt="عميل 4">
+                        </div>
+                        <div class="testimonial-item">
+                            <img src="images/portfolio12.jpg" alt="عميل 5">
+                        </div>
+                    </div>
+                           
+                
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+
+            <!-- Testimonials Section - 16 صورة -->
+<section class="testimonials-section" id="testimonials">
+    <div class="testimonials-container">
+        <h2 class="section-title">آراء عملائنا</h2>
+        <div class="testimonials-slider" id="testimonialsSlider">
+            <!-- الصورة 1 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials1.jpg" alt="عميل 1">
+            </div>
+            <!-- الصورة 2 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials2.jpg" alt="عميل 2">
+            </div>
+            <!-- الصورة 3 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials3.jpg" alt="عميل 3">
+            </div>
+            <!-- الصورة 4 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials4.jpg" alt="عميل 4">
+            </div>
+            <!-- الصورة 5 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials5.jpg" alt="عميل 5">
+            </div>
+            <!-- الصورة 6 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials6.jpg" alt="عميل 6">
+            </div>
+            <!-- الصورة 7 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials7.jpg" alt="عميل 7">
+            </div>
+            <!-- الصورة 8 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials8.jpg" alt="عميل 8">
+            </div>
+            <!-- الصورة 9 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials9.jpg" alt="عميل 9">
+            </div>
+            <!-- الصورة 10 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials10.jpg" alt="عميل 10">
+            </div>
+            <!-- الصورة 11 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials11.jpg" alt="عميل 11">
+            </div>
+            <!-- الصورة 12 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials12.jpg" alt="عميل 12">
+            </div>
+            <!-- الصورة 13 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials13.jpg" alt="عميل 13">
+            </div>
+            <!-- الصورة 14 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials14.jpg" alt="عميل 14">
+            </div>
+            <!-- الصورة 15 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials15.jpg" alt="عميل 15">
+            </div>
+            <!-- الصورة 16 -->
+            <div class="testimonial-item">
+                <img src="images/testimonials16.jpg" alt="عميل 16">
+            </div>
+        </div>
+        <div class="testimonials-link" style="display: flex; flex-direction: column; gap: 20px;">
+  <a href="https://drive.google.com/file/d/1mnRngO8bwQ6IALEHu9ntm-kaEoAPILcn/view?usp=drivesdk" download>📄 شاهد ملف الأعمال الكامل (PDF)</a>
+  
+</div>
+    </div>
+</section>
+
+            <!-- Categories Section -->
+            <section class="categories-section" id="categories">
+                <h2 class="section-title">تصفح حسب القسم</h2>
+                
+                <div class="categories-buttons">
+                    <button class="category-btn active" data-category="reception">ريسبشن</button>
+                    <button class="category-btn" data-category="master-bedroom">غرف الماستر</button>
+                    <button class="category-btn" data-category="boys-room">غرف الأولاد</button>
+                    <button class="category-btn" data-category="girls-room">غرف البنات</button>
+                    <button class="category-btn" data-category="small-bathroom">حمامات صغيرة فندقية</button>
+                    <button class="category-btn" data-category="large-bathroom">حمامات كبيرة فندقية</button>
+                    <button class="category-btn" data-category="kitchen">مطابخ</button>
+                    <button class="category-btn " data-category="fela-k">فيلا اكتوبر</button>
+                    <button class="category-btn " data-category="fela_3">فيلا االعبور</button>
+                    <button class="category-btn " data-category="garden">جاردن</button>
+                     <button class="category-btn " data-category="bab">مقترحات ابواب فيلال</button>
+                     <button class="category-btn " data-category="gardn">تصميمات جاردن</button>
+                    <button class="category-btn " data-category="srer">تصميمات غ نوم</button>
+                </div>
+
+                <div class="category-gallery" id="categoryGallery">
+                    <!-- سيتم ملء الصور هنا من JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- زر العودة للاستبيان - معدل -->
+        <button class="scroll-to-survey" id="scrollToSurveyBtn" title="اذهب للاستبيان"></button>
+
+        <!-- Contact -->
+        <section id="contact" class="contact-section">
+            <div class="container contact-card">
+                <h4>تواصل معنا</h4>
+                <p>الهاتف: <a href="tel:01125933005">01121322202</a></p>
+                <p>الهاتف: <a href="tel:01125933005">01289855558</a></p>
+                <div class="socials">
+                    <a href="https://www.instagram.com/almaestro.for.interiordesign?igsh=bXUzazN0bGk0cXFy" target="_blank">إنستاغرام</a>
+                    <a href="https://www.facebook.com/share/1CPJca9bDX/" target="_blank">فيسبوك</a>
+                    <a href="https://www.tiktok.com/@samehyoussry01?_r=1&_t=ZS-94Or2CYEHpw" target="_blank">تيك توك</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <small><span id="year"></span> — جميع الحقوق محفوظة</small>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
